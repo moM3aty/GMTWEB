@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Dashboard</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+</head>
+<body class="dashboard-body">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h3 class="fw-bold">GMT<span class="text-primary">Web</span></h3>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a asp-controller="Dashboard" asp-action="Index" class="active"><i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Dashboard</span></a></li>
+            <li><a asp-controller="Websites" asp-action="Index"><i class="fas fa-globe fa-fw me-3"></i><span>Websites</span></a></li>
+            <li><a asp-controller="BlogPosts" asp-action="Index"><i class="fas fa-blog fa-fw me-3"></i><span>Blog Posts</span></a></li>
+            <li><a asp-controller="Home" asp-action="Index"><i class="fas fa-sign-out-alt fa-fw me-3"></i><span>Back to Site</span></a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+                <button type="submit" class="logout-button"><i class="fas fa-power-off fa-fw me-2"></i>Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <header class="topbar">
+            <h4>@ViewData["Title"]</h4>
+            <!-- Add user profile info here later -->
+        </header>
+
+        <main class="content-wrapper">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/js/dashboard.js"></script> <!-- This should be before the scripts section -->
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

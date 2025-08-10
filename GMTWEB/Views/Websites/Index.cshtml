@@ -1,0 +1,52 @@
+﻿@model IEnumerable<GMTWEB.Models.Website>
+
+@{
+    ViewData["Title"] = "Manage Websites";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="card shadow-sm">
+    <div class="card-header bg-light d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Website Portfolio</h5>
+        <a asp-action="Create" class="btn btn-primary btn-sm"><i class="fas fa-plus me-2"></i>Add New Website</a>
+    </div>
+    <div class="card-body">
+        <form asp-action="Index" method="get" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="SearchString" class="form-control" placeholder="Search by name..." value="@ViewData["CurrentFilter"]">
+                <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Preview</th>
+                        <th>Name</th>
+                        <th>Link</th>
+                        <th>Date Added</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="@item.ImageUrl" alt="@item.Name" class="table-preview-img" />
+                            </td>
+                            <td>@item.Name</td>
+                            <td><a href="@item.Link" target="_blank">@item.Link</a></td>
+                            <td>@item.DateAdded.ToShortDateString()</td>
+                            <td class="text-end">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary me-2" title="Edit"><i class="fas fa-edit"></i></a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Delete"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

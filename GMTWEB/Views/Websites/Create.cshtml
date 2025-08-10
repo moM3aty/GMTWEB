@@ -1,0 +1,50 @@
+﻿@model GMTWEB.Models.WebsiteViewModel
+
+@{
+    ViewData["Title"] = "Add New Website";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="card shadow-sm">
+    <div class="card-header bg-light">
+        <h5 class="mb-0" data-en="Add New Website" data-ar="إضافة موقع جديد">Add New Website</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-8">
+                <form asp-action="Create" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NameAr" class="form-label"></label>
+                        <input asp-for="NameAr" class="form-control" dir="rtl" />
+                        <span asp-validation-for="NameAr" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Link" class="form-label"></label>
+                        <input asp-for="Link" class="form-control" />
+                        <span asp-validation-for="Link" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ImageFile" class="form-label"></label>
+                        <input asp-for="ImageFile" class="form-control" accept="image/*" onchange="previewImage(event)" />
+                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-4">
+                        <button type="submit" class="btn btn-primary" data-en="Create" data-ar="إنشاء">Create</button>
+                        <a asp-action="Index" class="btn btn-secondary" data-en="Back to List" data-ar="العودة للقائمة">Back to List</a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" data-en="Image Preview" data-ar="معاينة الصورة">Image Preview</label>
+                <img id="imagePreview" src="https://placehold.co/600x400/EFEFEF/AAAAAA?text=Preview" class="img-fluid rounded border" />
+            </div>
+        </div>
+    </div>
+</div>

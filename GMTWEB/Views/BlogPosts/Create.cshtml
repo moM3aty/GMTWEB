@@ -1,0 +1,91 @@
+﻿@model GMTWEB.Models.BlogPostViewModel
+
+@{
+    ViewData["Title"] = "Create New Post";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="card shadow-sm">
+    <div class="card-header bg-light">
+        <h5 class="mb-0" data-en="Create New Post" data-ar="إنشاء مقالة جديدة">Create New Post</h5>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-8">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <!-- Language Tabs Navigation -->
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="english-tab" data-bs-toggle="tab" data-bs-target="#english-content" type="button" role="tab" aria-controls="english-content" aria-selected="true">English</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="arabic-tab" data-bs-toggle="tab" data-bs-target="#arabic-content" type="button" role="tab" aria-controls="arabic-content" aria-selected="false">العربية</button>
+                        </li>
+                    </ul>
+
+                    <!-- Tabs Content -->
+                    <div class="tab-content pt-4" id="myTabContent">
+                        <!-- English Content -->
+                        <div class="tab-pane fade show active" id="english-content" role="tabpanel" aria-labelledby="english-tab">
+                            <div class="mb-3">
+                                <label asp-for="Title" class="form-label"></label>
+                                <input asp-for="Title" class="form-control" />
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="Content" class="form-label"></label>
+                                <textarea asp-for="Content" class="form-control editor" rows="10"></textarea>
+                                <span asp-validation-for="Content" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <!-- Arabic Content -->
+                        <div class="tab-pane fade" id="arabic-content" role="tabpanel" aria-labelledby="arabic-tab">
+                            <div class="mb-3">
+                                <label asp-for="TitleAr" class="form-label"></label>
+                                <input asp-for="TitleAr" class="form-control" dir="rtl" />
+                                <span asp-validation-for="TitleAr" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="ContentAr" class="form-label"></label>
+                                <textarea asp-for="ContentAr" class="form-control editor" dir="rtl" rows="10"></textarea>
+                                <span asp-validation-for="ContentAr" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <!-- Image Upload Section -->
+                    <div class="mb-3">
+                        <label asp-for="ImageFile" class="form-label"></label>
+                        <input asp-for="ImageFile" class="form-control" accept="image/*" onchange="previewImage(event)" />
+                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="form-label" data-en="Image Preview" data-ar="معاينة الصورة">Image Preview</label>
+                        <img id="imagePreview" src="https://placehold.co/600x400/EFEFEF/AAAAAA?text=Preview" class="img-fluid rounded border" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-4 border-top pt-3">
+                <button type="submit" class="btn btn-primary" data-en="Create Post" data-ar="إنشاء المقالة">Create Post</button>
+                <a asp-action="Index" class="btn btn-secondary" data-en="Back to List" data-ar="العودة للقائمة">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.editor').forEach(editor => {
+            tinymce.init({
+                target: editor,
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+                directionality: editor.dir === 'rtl' ? 'rtl' : 'ltr'
+            });
+        });
+    </script>
+}

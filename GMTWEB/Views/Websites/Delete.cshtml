@@ -1,0 +1,28 @@
+﻿@model GMTWEB.Models.Website
+
+@{
+    ViewData["Title"] = "Confirm Deletion";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="card shadow-sm delete-card">
+    <div class="card-header text-white bg-danger">
+        <h5 class="mb-0">@ViewData["Title"]</h5>
+    </div>
+    <div class="card-body">
+        <p class="lead">Are you sure you want to permanently delete this website?</p>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">@Model.Name</dd>
+            <dt class="col-sm-3">Image</dt>
+            <dd class="col-sm-9"><img src="@Model.ImageUrl" style="max-width: 200px;" class="img-thumbnail" /></dd>
+        </dl>
+
+        <form asp-action="Delete" class="mt-4">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <a asp-action="Index" class="btn btn-secondary">No, Cancel</a>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="We design and develop educational websites and platforms combining modern aesthetics, performance, and usability to empower institutions and educators">
+    <meta name="author" content="Reem Mohamed">
+    <meta name="keywords" content="websites, software, landing page, educational platforms">
+    <link rel="icon" href="" type="image/x-icon">
+    <link rel="stylesheet" href="~/css/all.min.css">
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <title>GMTWeb – Web Solutions</title>
+
+    <!-- SEO Structured Data -->
+    <script type="application/ld+json">
+        {
+          "@@context": "https://schema.org",
+          "@@type": "ProfessionalService",
+          "name": "GMTWeb",
+          "image": "", // Add URL to your logo here e.g., "https://www.gmtweb.online/logo.png"
+          "@@id": "", // Add URL to your website here e.g., "https://www.gmtweb.online"
+          "url": "https://www.gmtweb.online",
+          "telephone": "+201149364431",
+          "email": "info@gmtweb.online",
+          "address": {
+            "@@type": "PostalAddress",
+            "streetAddress": "3 Al Ansar main street",
+            "addressLocality": "Giza",
+            "addressCountry": "EG"
+          },
+          "contactPoint": [{
+            "@@type": "ContactPoint",
+            "telephone": "+201149364431",
+            "contactType": "customer service",
+            "areaServed": "EG",
+            "availableLanguage": ["en", "Arabic"]
+          },{
+            "@@type": "ContactPoint",
+            "telephone": "+201149364431",
+            "contactType": "sales",
+            "contactOption": "TollFree",
+            "areaServed": "EG",
+            "availableLanguage": ["en", "Arabic"]
+          }]
+        }
+    </script>
+
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbarNav" data-bs-offset="100" tabindex="0">
+    <nav class="navbar navbar-expand-lg fixed-top py-3 navbar-dark bg-black border-bottom border-secondary">
+        <div class="container-fluid container-lg">
+            <a class="navbar-brand fw-bold" href="#">GMT<span class="">Web</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto mb-3 mb-lg-0 gap-4 text-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home" data-ar="الرئيسية" data-en="Home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about" data-ar="من نحن" data-en="About Us">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services" data-ar="الخدمات" data-en="Services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#works" data-ar="أعمالنا" data-en="Works">Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Blog" asp-action="Index" data-ar="المدونة" data-en="Blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact" data-ar="اتصل بنا" data-en="Contact Us">Contact Us</a>
+                    </li>
+                    
+                </ul>
+
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-outline-primary btn-sm px-4 language-btn">العربية</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    @RenderBody()
+
+
+    <footer class="bg-dark text-white py-4 mt-5" id="footer">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-4">
+                    <h4 class="fw-bold text-primary">GMTWeb</h4>
+                    <p data-en="We design and develop educational websites and platforms combining modern aesthetics, performance, and usability to empower institutions and educators."
+                       data-ar="نقوم بتصميم وتطوير مواقع ومنصات تعليمية تجمع بين الجمال الحديث والأداء وسهولة الاستخدام لتمكين المؤسسات والمعلمين.">
+                        We design and develop educational websites and platforms combining modern aesthetics, performance, and usability to empower institutions and educators.
+                    </p>
+                </div>
+
+
+                <div class="col-lg-4">
+                    <h5 class="fw-bold text-primary" data-en="Quick Links" data-ar="روابط سريعة">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#home" class="text-white text-decoration-none" data-en="Home" data-ar="الرئيسية">Home</a></li>
+                        <li><a href="#about" class="text-white text-decoration-none" data-en="About Us" data-ar="من نحن">About Us</a></li>
+                        <li><a href="#services" class="text-white text-decoration-none" data-en="Services" data-ar="خدماتنا">Services</a></li>
+                        <li><a href="#works" class="text-white text-decoration-none" data-en="Works" data-ar="أعمالنا">Works</a></li>
+                        <li><a href="#contact" class="text-white text-decoration-none" data-en="Contact Us" data-ar="تواصل معنا">Contact Us</a></li>
+                    </ul>
+                </div>
+
+
+                <div class="col-lg-4">
+                    <h5 class="fw-bold text-primary" data-en="Contact Us" data-ar="تواصل معنا">Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fa-solid fa-location-dot text-primary"></i>
+                            <span class="mx-1"
+                                  data-en="3 Al Ansar main street, Giza, Egypt"
+                                  data-ar="٣ شارع الأنصار الرئيسي، الجيزة، مصر">
+                                3 Al Ansar main street, Giza, Egypt
+                            </span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fa-solid fa-phone-volume text-primary"></i>
+                            <span class="mx-1">01149364431</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-envelope text-primary"></i>
+                            <span class="mx-1">info@gmtweb.online</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="row mt-4">
+                <div class="col text-center">
+                    <p data-en="&copy; 2025 GMTWeb. All Rights Reserved."
+                       data-ar="&copy; ٢٠٢٥ GMTWeb. جميع الحقوق محفوظة.">
+                        &copy; 2025 GMTWeb. All Rights Reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    </main>
+    <a href="https://wa.me/201149364431" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+
+
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="~/js/index.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

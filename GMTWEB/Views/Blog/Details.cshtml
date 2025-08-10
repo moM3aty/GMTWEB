@@ -1,0 +1,24 @@
+﻿@model GMTWEB.Models.BlogPost
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container py-5 mt-5">
+    <article>
+        <header class="mb-4">
+            <h1 data-en="@Model.Title" data-ar="@Model.TitleAr">@Model.Title</h1>
+            <div class="text-muted fst-italic mb-2">Posted on @Model.DatePosted.ToString("MMMM dd, yyyy") by @Model.Author</div>
+        </header>
+        <hr />
+
+        <section class="mb-5 lang-content lang-en-content">
+            @Html.Raw(Model.Content)
+        </section>
+
+        <section class="mb-5 lang-content lang-ar-content" dir="rtl" style="display:none;">
+            @Html.Raw(Model.ContentAr)
+        </section>
+
+    </article>
+</div>

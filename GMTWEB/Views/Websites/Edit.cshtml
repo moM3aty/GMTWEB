@@ -1,0 +1,52 @@
+﻿@model GMTWEB.Models.WebsiteViewModel
+
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    ViewData["Title"] = "Edit Website";
+}
+
+<div class="card shadow-sm">
+    <div class="card-header bg-light">
+        <h5 class="mb-0" data-en="Edit Website" data-ar="تعديل الموقع">Edit Website</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-8">
+                <form asp-action="Edit" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="ExistingImageUrl" />
+
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NameAr" class="form-label"></label>
+                        <input asp-for="NameAr" class="form-control" dir="rtl" />
+                        <span asp-validation-for="NameAr" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Link" class="form-label"></label>
+                        <input asp-for="Link" class="form-control" />
+                        <span asp-validation-for="Link" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ImageFile" class="form-label" data-en="New Image (optional)" data-ar="صورة جديدة (اختياري)"></label>
+                        <input asp-for="ImageFile" class="form-control" accept="image/*" onchange="previewImage(event)" />
+                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-4">
+                        <button type="submit" class="btn btn-primary" data-en="Save Changes" data-ar="حفظ التغييرات">Save Changes</button>
+                        <a asp-action="Index" class="btn btn-secondary" data-en="Back to List" data-ar="العودة للقائمة">Back to List</a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" data-en="Image Preview" data-ar="معاينة الصورة">Image Preview</label>
+                <img id="imagePreview" src="@Model.ExistingImageUrl" class="img-fluid rounded border" />
+            </div>
+        </div>
+    </div>
+</div>

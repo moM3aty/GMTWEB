@@ -1,0 +1,67 @@
+﻿@model GMTWEB.Models.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard Overview";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<!-- Stat Cards -->
+<div class="row g-4">
+    <div class="col-lg-4 col-md-6">
+        <div class="stat-card card-websites">
+            <div class="stat-card-icon"><i class="fas fa-globe"></i></div>
+            <div class="stat-card-info">
+                <p class="stat-card-title" data-en="Total Websites" data-ar="إجمالي المواقع">Total Websites</p>
+                <h4 class="stat-card-number">@Model.WebsitesCount</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <div class="stat-card card-users">
+            <div class="stat-card-icon"><i class="fas fa-users"></i></div>
+            <div class="stat-card-info">
+                <p class="stat-card-title" data-en="Registered Users" data-ar="المستخدمون المسجلون">Registered Users</p>
+                <h4 class="stat-card-number">@Model.UsersCount</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <div class="stat-card card-posts">
+            <div class="stat-card-icon"><i class="fas fa-blog"></i></div>
+            <div class="stat-card-info">
+                <p class="stat-card-title" data-en="Blog Posts" data-ar="مقالات المدونة">Blog Posts</p>
+                <h4 class="stat-card-number">@Model.BlogPostsCount</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Row -->
+<div class="row g-4 mt-4">
+    <div class="col-xl-8">
+        <div class="chart-container">
+            <h5 class="mb-3" data-en="Monthly Website Additions (@DateTime.Now.Year)" data-ar="المواقع المضافة شهريًا (@DateTime.Now.Year)">Monthly Website Additions</h5>
+            <canvas id="websitesChart"></canvas>
+        </div>
+    </div>
+    <div class="col-xl-4">
+        <div class="chart-container">
+            <h5 class="mb-3" data-en="Project Types" data-ar="أنواع المشاريع">Project Types</h5>
+            <canvas id="projectTypesChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mt-4">
+    <div class="col-12">
+        <div class="chart-container">
+            <h5 class="mb-3" data-en="Monthly Blog Posts" data-ar="المقالات الشهرية">Monthly Blog Posts</h5>
+            <canvas id="blogPostsChart"></canvas>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const monthlyWebsiteData = @Html.Raw(Json.Serialize(Model.MonthlyWebsiteData));
+    </script>
+}

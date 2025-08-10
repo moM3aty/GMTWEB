@@ -1,0 +1,17 @@
+﻿@model GMTWEB.Models.BlogPost
+
+@{
+    ViewData["Title"] = "Confirm Deletion";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h3>Are you sure you want to delete this post?</h3>
+<div>
+    <h4>@Model.Title</h4>
+    <hr />
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Delete</button> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
