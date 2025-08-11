@@ -1,8 +1,9 @@
 ﻿@model GMTWEB.Models.WebsiteViewModel
+@using GMTWEB.Models
 
 @{
-    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
     ViewData["Title"] = "Edit Website";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
 <div class="card shadow-sm">
@@ -33,6 +34,11 @@
                         <span asp-validation-for="Link" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
+                        <label asp-for="Type" class="form-label"></label>
+                        <select asp-for="Type" asp-items="Html.GetEnumSelectList<ProjectType>()" class="form-select"></select>
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
                         <label asp-for="ImageFile" class="form-label" data-en="New Image (optional)" data-ar="صورة جديدة (اختياري)"></label>
                         <input asp-for="ImageFile" class="form-control" accept="image/*" onchange="previewImage(event)" />
                         <span asp-validation-for="ImageFile" class="text-danger"></span>
@@ -45,7 +51,7 @@
             </div>
             <div class="col-md-4">
                 <label class="form-label" data-en="Image Preview" data-ar="معاينة الصورة">Image Preview</label>
-                <img id="imagePreview" src="@Model.ExistingImageUrl" class="img-fluid rounded border" />
+                <img id="imagePreview" src="@(Model.ExistingImageUrl ?? "https://placehold.co/600x400/EFEFEF/AAAAAA?text=No+Image")" class="img-fluid rounded border" />
             </div>
         </div>
     </div>

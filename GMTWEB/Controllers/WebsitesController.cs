@@ -18,7 +18,6 @@ namespace GMTWEB.Controllers
             _hostEnvironment = hostEnvironment;
         }
 
-        // GET: Websites
         public async Task<IActionResult> Index(string searchString)
         {
             ViewData["CurrentFilter"] = searchString;
@@ -30,13 +29,11 @@ namespace GMTWEB.Controllers
             return View(await websites.OrderByDescending(w => w.DateAdded).ToListAsync());
         }
 
-        // GET: Websites/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Websites/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(WebsiteViewModel model)
@@ -69,8 +66,9 @@ namespace GMTWEB.Controllers
                 var website = new Website
                 {
                     Name = model.Name,
-                    NameAr = model.NameAr, 
+                    NameAr = model.NameAr,
                     Link = model.Link,
+                    Type = model.Type,
                     ImageUrl = "/uploads/websites/" + uniqueFileName
                 };
 
@@ -81,7 +79,6 @@ namespace GMTWEB.Controllers
             return View(model);
         }
 
-        // GET: Websites/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -95,13 +92,13 @@ namespace GMTWEB.Controllers
                 Name = website.Name,
                 NameAr = website.NameAr,
                 Link = website.Link,
+                Type = website.Type,
                 ExistingImageUrl = website.ImageUrl
             };
 
             return View(viewModel);
         }
 
-        // POST: Websites/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, WebsiteViewModel model)
@@ -144,6 +141,7 @@ namespace GMTWEB.Controllers
                 website.Name = model.Name;
                 website.NameAr = model.NameAr;
                 website.Link = model.Link;
+                website.Type = model.Type;
 
                 try
                 {
@@ -160,18 +158,14 @@ namespace GMTWEB.Controllers
             return View(model);
         }
 
-        // GET: Websites/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
-
             var website = await _context.Websites.FirstOrDefaultAsync(m => m.Id == id);
             if (website == null) return NotFound();
-
             return View(website);
         }
 
-        // POST: Websites/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -189,7 +183,6 @@ namespace GMTWEB.Controllers
                 }
                 _context.Websites.Remove(website);
             }
-
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

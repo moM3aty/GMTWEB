@@ -10,7 +10,7 @@
         <h5 class="mb-0" data-en="Create New Post" data-ar="إنشاء مقالة جديدة">Create New Post</h5>
     </div>
     <div class="card-body">
-        <form asp-action="Create" enctype="multipart/form-data">
+        <form asp-action="Create" enctype="multipart/form-data" id="blogPostForm">
             <div class="row">
                 <div class="col-md-8">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -36,7 +36,8 @@
                             </div>
                             <div class="mb-3">
                                 <label asp-for="Content" class="form-label"></label>
-                                <textarea asp-for="Content" class="form-control editor" rows="10"></textarea>
+                                <input type="hidden" asp-for="Content" />
+                                <div id="editor-en" class="quill-editor"></div>
                                 <span asp-validation-for="Content" class="text-danger"></span>
                             </div>
                         </div>
@@ -49,7 +50,8 @@
                             </div>
                             <div class="mb-3">
                                 <label asp-for="ContentAr" class="form-label"></label>
-                                <textarea asp-for="ContentAr" class="form-control editor" dir="rtl" rows="10"></textarea>
+                                <input type="hidden" asp-for="ContentAr" />
+                                <div id="editor-ar" class="quill-editor" dir="rtl"></div>
                                 <span asp-validation-for="ContentAr" class="text-danger"></span>
                             </div>
                         </div>
@@ -79,13 +81,30 @@
 
 @section Scripts {
     <script>
-        document.querySelectorAll('.editor').forEach(editor => {
-            tinymce.init({
-                target: editor,
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-                directionality: editor.dir === 'rtl' ? 'rtl' : 'ltr'
-            });
+        var toolbarOptions = [
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'align': [] }],
+            ['link', 'image'],
+            ['clean']
+        ];
+
+        var quillEn = new Quill('#editor-en', {
+            modules: { toolbar: toolbarOptions },
+            theme: 'snow'
         });
+
+        var quillAr = new Quill('#editor-ar', {
+            modules: { toolbar: toolbarOptions },
+            theme: 'snow'
+        });
+
+        var form = document.querySelector('#blogPostForm');
+        form.onsubmit = function() {
+            // Populate hidden fields with HTML content
+            document.querySelector('input[name=Content]').value = quillEn.root.innerHTML;
+            document.querySelector('input[name=ContentAr]').value = quillAr.root.innerHTML;
+        };
     </script>
 }

@@ -6,16 +6,27 @@
 
 <div class="container py-5 mt-5">
     <article>
-        <header class="mb-4">
-            <h1 data-en="@Model.Title" data-ar="@Model.TitleAr">@Model.Title</h1>
-            <div class="text-muted fst-italic mb-2">Posted on @Model.DatePosted.ToString("MMMM dd, yyyy") by @Model.Author</div>
-        </header>
+        <div class="mb-4">
+            <!-- Post Title -->
+            <h1 class="fw-bolder mb-1" data-en="@Model.Title" data-ar="@Model.TitleAr">@Model.Title</h1>
+            <!-- Post Meta -->
+            <div class="text-muted fst-italic mb-3">Posted on @Model.DatePosted.ToString("MMMM dd, yyyy") by @Model.Author</div>
+            <!-- Post Image -->
+            <figure class="mb-4">
+                <img class="img-fluid rounded blog-details-img"
+                     src="@(Model.ImageUrl ?? "https://placehold.co/900x400/EFEFEF/AAAAAA?text=No+Image")"
+                     alt="@Model.Title"
+                     onerror="this.onerror=null;this.src='https://placehold.co/900x400/EFEFEF/AAAAAA?text=Image+Error';">
+            </figure>
+        </div>
         <hr />
 
+        <!-- Post Content (English) -->
         <section class="mb-5 lang-content lang-en-content">
             @Html.Raw(Model.Content)
         </section>
 
+        <!-- Post Content (Arabic) -->
         <section class="mb-5 lang-content lang-ar-content" dir="rtl" style="display:none;">
             @Html.Raw(Model.ContentAr)
         </section>

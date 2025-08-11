@@ -21,6 +21,7 @@ namespace GMTWEB.Controllers
 
         public async Task<IActionResult> Index()
         {
+            // --- Website Data ---
             var monthlyWebsiteData = new int[12];
             var websitesThisYear = await _context.Websites
                 .Where(w => w.DateAdded.Year == DateTime.Now.Year)
@@ -31,6 +32,7 @@ namespace GMTWEB.Controllers
                 monthlyWebsiteData[i] = websiteGroups.ContainsKey(i + 1) ? websiteGroups[i + 1] : 0;
             }
 
+            // --- Blog Post Data ---
             var monthlyBlogPostData = new int[12];
             var blogPostsThisYear = await _context.BlogPosts
                 .Where(b => b.DatePosted.Year == DateTime.Now.Year)
@@ -41,6 +43,16 @@ namespace GMTWEB.Controllers
                 monthlyBlogPostData[i] = blogPostGroups.ContainsKey(i + 1) ? blogPostGroups[i + 1] : 0;
             }
 
+            // --- Project Type Data (New Dynamic Logic) ---
+            var projectTypeGroups = await _context.Websites
+                .GroupBy(w => w.Type)
+                .Select(g => new { Type = g.Key, Count = g.Count() })
+                .ToListAsync();
+
+            var projectTypeLabels = projectTypeGroups.Select(g => g.Type.ToString()).ToList();
+            var projectTypeData = projectTypeGroups.Select(g => g.Count).ToList();
+
+
             // --- ViewModel ---
             var viewModel = new DashboardViewModel
             {
@@ -48,7 +60,9 @@ namespace GMTWEB.Controllers
                 UsersCount = await _userManager.Users.CountAsync(),
                 BlogPostsCount = await _context.BlogPosts.CountAsync(),
                 MonthlyWebsiteData = monthlyWebsiteData.ToList(),
-                MonthlyBlogPostData = monthlyBlogPostData.ToList() 
+                MonthlyBlogPostData = monthlyBlogPostData.ToList(),
+                ProjectTypeLabels = projectTypeLabels, 
+                ProjectTypeData = projectTypeData      
             };
 
             return View(viewModel);

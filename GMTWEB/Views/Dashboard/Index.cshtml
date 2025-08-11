@@ -3,7 +3,6 @@
     ViewData["Title"] = "Dashboard Overview";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
-
 <!-- Stat Cards -->
 <div class="row g-4">
     <div class="col-lg-4 col-md-6">
@@ -63,5 +62,8 @@
 @section Scripts {
     <script>
         const monthlyWebsiteData = @Html.Raw(Json.Serialize(Model.MonthlyWebsiteData));
+        const monthlyBlogPostData = @Html.Raw(Json.Serialize(Model.MonthlyBlogPostData));
+        const projectTypeLabels = @Html.Raw(Json.Serialize(Model.ProjectTypeLabels));
+        const projectTypeData = @Html.Raw(Json.Serialize(Model.ProjectTypeData));
     </script>
 }

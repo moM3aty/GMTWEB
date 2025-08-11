@@ -14,32 +14,108 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const chartFont = "'Poppins', sans-serif";
     Chart.defaults.font.family = chartFont;
+    Chart.defaults.plugins.tooltip.backgroundColor = '#0f172a'; 
+    Chart.defaults.plugins.tooltip.titleFont.size = 14;
+    Chart.defaults.plugins.tooltip.bodyFont.size = 12;
+    Chart.defaults.plugins.tooltip.padding = 10;
+    Chart.defaults.plugins.tooltip.cornerRadius = 8;
+    Chart.defaults.plugins.tooltip.boxPadding = 4;
+
+    const commonChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    stepSize: 1,
+                    color: '#64748b'
+                },
+                grid: {
+                    color: '#e2e8f0', 
+                    drawBorder: false,
+                }
+            },
+            x: {
+                ticks: {
+                    color: '#64748b'
+                },
+                grid: {
+                    display: false,
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    };
 
     // 1. Websites Line Chart
     if (document.getElementById('websitesChart')) {
         const ctx = document.getElementById('websitesChart').getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(79, 70, 229, 0.3)');
+        gradient.addColorStop(1, 'rgba(79, 70, 229, 0)');
+
         const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        const data = { labels: labels, datasets: [{ label: 'New Websites', data: typeof monthlyWebsiteData !== 'undefined' ? monthlyWebsiteData : [], borderColor: '#4f46e5', backgroundColor: 'rgba(79, 70, 229, 0.1)', fill: true, tension: 0.4, borderWidth: 2 }] };
-        new Chart(ctx, { type: 'line', data: data, options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }, plugins: { legend: { display: false } } } });
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'New Websites',
+                data: typeof monthlyWebsiteData !== 'undefined' ? monthlyWebsiteData : [],
+                borderColor: '#4f46e5',
+                backgroundColor: gradient,
+                fill: true,
+                tension: 0.4,
+                borderWidth: 2,
+                pointBackgroundColor: '#4f46e5',
+                pointHoverBackgroundColor: '#ffffff',
+                pointHoverBorderColor: '#4f46e5',
+                pointHoverRadius: 6,
+                pointRadius: 4
+            }]
+        };
+        new Chart(ctx, { type: 'line', data: data, options: commonChartOptions });
     }
 
-    // 2. Project Types Doughnut Chart
+    // 2. Project Types Doughnut Chart (NOW DYNAMIC)
     if (document.getElementById('projectTypesChart')) {
         const ctx = document.getElementById('projectTypesChart').getContext('2d');
         const data = {
-            labels: ['Educational', 'Corporate', 'E-commerce', 'Portfolio'],
+            labels: typeof projectTypeLabels !== 'undefined' ? projectTypeLabels : [],
             datasets: [{
                 label: 'Project Types',
-                data: [12, 19, 5, 8], // Dummy data
+                data: typeof projectTypeData !== 'undefined' ? projectTypeData : [],
                 backgroundColor: ['#4f46e5', '#16a34a', '#f97316', '#64748b'],
                 borderColor: '#fff',
-                borderWidth: 2
+                borderWidth: 4,
+                hoverOffset: 10
             }]
         };
-        new Chart(ctx, { type: 'doughnut', data: data, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } } });
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true,
+                            pointStyle: 'circle'
+                        }
+                    }
+                }
+            }
+        });
     }
 
-    // 3. Blog Posts Bar Chart (NOW DYNAMIC)
+    // 3. Blog Posts Bar Chart
     if (document.getElementById('blogPostsChart')) {
         const ctx = document.getElementById('blogPostsChart').getContext('2d');
         const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -47,16 +123,16 @@ document.addEventListener('DOMContentLoaded', function () {
             labels: labels,
             datasets: [{
                 label: 'New Blog Posts',
-                data: typeof monthlyBlogPostData !== 'undefined' ? monthlyBlogPostData : [], // <-- Use real data
-                backgroundColor: 'rgba(249, 115, 22, 0.7)',
+                data: typeof monthlyBlogPostData !== 'undefined' ? monthlyBlogPostData : [],
+                backgroundColor: '#ffedd5',
                 borderColor: '#f97316',
-                borderWidth: 1,
-                borderRadius: 4
+                borderWidth: 2,
+                borderRadius: 8,
+                hoverBackgroundColor: '#f97316'
             }]
         };
-        new Chart(ctx, { type: 'bar', data: data, options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }, plugins: { legend: { display: false } } } });
+        new Chart(ctx, { type: 'bar', data: data, options: commonChartOptions });
     }
-
 
     // --- Language Switcher Logic ---
     const langBtn = document.querySelector('.dashboard-language-btn');
@@ -90,7 +166,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     updateDashboardLanguage(currentDashboardLang);
 
-    // Active sidebar link logic...
     const currentPageTitle = document.title.split(' - ')[0];
     const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
     sidebarLinks.forEach(link => {

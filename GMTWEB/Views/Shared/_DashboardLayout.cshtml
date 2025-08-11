@@ -9,8 +9,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Quill.js Editor CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
     <link rel="stylesheet" href="~/css/dashboard.css" />
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body class="dashboard-body">
     <div class="sidebar">
@@ -18,22 +21,25 @@
             <h3 class="fw-bold">GMT<span class="text-primary">Web</span></h3>
         </div>
         <ul class="sidebar-nav">
-            <li><a asp-controller="Dashboard" asp-action="Index" class="active"><i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Dashboard</span></a></li>
-            <li><a asp-controller="Websites" asp-action="Index"><i class="fas fa-globe fa-fw me-3"></i><span>Websites</span></a></li>
-            <li><a asp-controller="BlogPosts" asp-action="Index"><i class="fas fa-blog fa-fw me-3"></i><span>Blog Posts</span></a></li>
-            <li><a asp-controller="Home" asp-action="Index"><i class="fas fa-sign-out-alt fa-fw me-3"></i><span>Back to Site</span></a></li>
+            <li><a asp-controller="Dashboard" asp-action="Index"><i class="fas fa-tachometer-alt fa-fw me-3"></i><span data-en="Dashboard" data-ar="لوحة التحكم">Dashboard</span></a></li>
+            <li><a asp-controller="Websites" asp-action="Index"><i class="fas fa-globe fa-fw me-3"></i><span data-en="Websites" data-ar="المواقع">Websites</span></a></li>
+            <li><a asp-controller="BlogPosts" asp-action="Index"><i class="fas fa-blog fa-fw me-3"></i><span data-en="Blog Posts" data-ar="المدونات">Blog Posts</span></a></li>
+            <li><a asp-controller="Home" asp-action="Index"><i class="fas fa-sign-out-alt fa-fw me-3"></i><span data-en="Back to Site" data-ar="العودة للموقع">Back to Site</span></a></li>
         </ul>
         <div class="sidebar-footer">
             <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
-                <button type="submit" class="logout-button"><i class="fas fa-power-off fa-fw me-2"></i>Logout</button>
+                <button type="submit" class="logout-button"><i class="fas fa-power-off fa-fw me-2"></i><span data-en="Logout" data-ar="تسجيل الخروج">Logout</span></button>
             </form>
         </div>
     </div>
 
     <div class="main-content">
-        <header class="topbar">
-            <h4>@ViewData["Title"]</h4>
-            <!-- Add user profile info here later -->
+        <header class="topbar d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">@ViewData["Title"]</h4>
+            <button class="btn btn-outline-secondary btn-sm dashboard-language-btn">
+                <i class="fas fa-language"></i>
+                <span class="ms-2">العربية</span>
+            </button>
         </header>
 
         <main class="content-wrapper">
@@ -44,7 +50,10 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="~/js/dashboard.js"></script> <!-- This should be before the scripts section -->
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+    <script src="~/js/dashboard.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

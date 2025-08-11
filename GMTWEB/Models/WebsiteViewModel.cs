@@ -20,6 +20,10 @@ namespace GMTWEB.Models
         [Url]
         public string Link { get; set; }
 
+        [Required]
+        [Display(Name = "Project Type")]
+        public ProjectType Type { get; set; } 
+
         public IFormFile? ImageFile { get; set; }
 
         public string? ExistingImageUrl { get; set; }

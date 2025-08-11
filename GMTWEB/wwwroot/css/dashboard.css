@@ -274,7 +274,7 @@
 
 .chart-container {
     background-color: var(--bg-panel);
-    padding: 30px;
+    padding: 20px 20px 50px 20px;
     border-radius: var(--radius);
     box-shadow: var(--shadow-md);
     position: relative;

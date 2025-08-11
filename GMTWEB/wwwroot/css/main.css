@@ -441,3 +441,29 @@ h1,h2,h3,h4,h5,h6{
 .whatsapp-float i {
   vertical-align: middle;
 }
+/* --- Blog Page Styles --- */
+.blog-card {
+    transition: var(--transition);
+    box-shadow: var(--box-shadow);
+    border: 1px solid #eee;
+}
+
+    .blog-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--box-shadow-lg);
+    }
+
+.blog-card-img {
+    height: 200px;
+    object-fit: cover; 
+}
+
+.blog-details-img {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+}
+
+.card-title {
+    color: var(--main-color);
+}

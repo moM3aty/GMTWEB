@@ -2,6 +2,15 @@
 
 namespace GMTWEB.Models
 {
+    // تعريف أنواع المشاريع
+    public enum ProjectType
+    {
+        Educational,
+        Corporate,
+        Ecommerce,
+        Portfolio
+    }
+
     public class Website
     {
         public int Id { get; set; }
@@ -12,7 +21,7 @@ namespace GMTWEB.Models
 
         [Required]
         [StringLength(100)]
-        public string NameAr { get; set; } 
+        public string NameAr { get; set; }
 
         [Required]
         [Url]
@@ -20,6 +29,9 @@ namespace GMTWEB.Models
 
         [Required]
         public string ImageUrl { get; set; }
+
+        [Required]
+        public ProjectType Type { get; set; } 
 
         public DateTime DateAdded { get; set; } = DateTime.UtcNow;
     }

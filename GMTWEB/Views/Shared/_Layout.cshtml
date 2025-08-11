@@ -6,7 +6,7 @@
     <meta name="description" content="We design and develop educational websites and platforms combining modern aesthetics, performance, and usability to empower institutions and educators">
     <meta name="author" content="Reem Mohamed">
     <meta name="keywords" content="websites, software, landing page, educational platforms">
-    <link rel="icon" href="" type="image/x-icon">
+    <link rel="icon" href="~/imgs/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="~/css/all.min.css">
     <link rel="stylesheet" href="~/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
@@ -22,8 +22,8 @@
           "@@context": "https://schema.org",
           "@@type": "ProfessionalService",
           "name": "GMTWeb",
-          "image": "", // Add URL to your logo here e.g., "https://www.gmtweb.online/logo.png"
-          "@@id": "", // Add URL to your website here e.g., "https://www.gmtweb.online"
+          "image": "~/imgs/logo.png", // Add URL to your logo here e.g., "https://www.gmtweb.online/logo.png"
+          "@@id": ""https://www.gmtweb.online", // Add URL to your website here e.g., "https://www.gmtweb.online"
           "url": "https://www.gmtweb.online",
           "telephone": "+201149364431",
           "email": "info@gmtweb.online",
@@ -61,25 +61,25 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto mb-3 mb-lg-0 gap-4 text-center">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#home" data-ar="الرئيسية" data-en="Home">Home</a>
+                        <a class="nav-link active" asp-controller="Home" asp-action="Index" asp-fragment="home" data-ar="الرئيسية" data-en="Home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about" data-ar="من نحن" data-en="About Us">About Us</a>
+                        <a class="nav-link" asp-controller="Home" asp-action="Index" asp-fragment="about" data-ar="من نحن" data-en="About Us">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#services" data-ar="الخدمات" data-en="Services">Services</a>
+                        <a class="nav-link" asp-controller="Home" asp-action="Index" asp-fragment="services" data-ar="الخدمات" data-en="Services">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#works" data-ar="أعمالنا" data-en="Works">Works</a>
+                        <a class="nav-link" asp-controller="Home" asp-action="Index" asp-fragment="works" data-ar="أعمالنا" data-en="Works">Works</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Blog" asp-action="Index" data-ar="المدونة" data-en="Blog">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact" data-ar="اتصل بنا" data-en="Contact Us">Contact Us</a>
+                        <a class="nav-link" asp-controller="Home" asp-action="Index" asp-fragment="contact" data-ar="اتصل بنا" data-en="Contact Us">Contact Us</a>
                     </li>
-                    
                 </ul>
+
 
                 <div class="d-flex justify-content-center">
                     <button class="btn btn-outline-primary btn-sm px-4 language-btn">العربية</button>
