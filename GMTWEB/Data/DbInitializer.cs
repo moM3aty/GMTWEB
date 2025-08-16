@@ -23,7 +23,7 @@ namespace GMTWEB.Data
                     EmailConfirmed = true 
                 };
 
-                var result = await userManager.CreateAsync(adminUser, "Admin@12345");
+                var result = await userManager.CreateAsync(adminUser, "yourPassword");
 
                 if (!result.Succeeded)
                 {
