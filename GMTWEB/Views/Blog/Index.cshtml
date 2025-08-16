@@ -10,7 +10,7 @@
     <div class="row g-4">
         @foreach (var post in Model)
         {
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-6">
                 <a asp-action="Details" asp-route-id="@post.Id" class="card h-100 blog-card text-decoration-none">
                     <img src="@(post.ImageUrl ?? "https://placehold.co/600x400/EFEFEF/AAAAAA?text=No+Image")"
                          class="card-img-top blog-card-img"

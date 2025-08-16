@@ -2,7 +2,9 @@
 @{
     ViewData["Title"] = "Dashboard Overview";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+
 }
+
 <!-- Stat Cards -->
 <div class="row g-4">
     <div class="col-lg-4 col-md-6">
@@ -50,19 +52,35 @@
     </div>
 </div>
 
+<!-- Recent Blog Posts Section -->
 <div class="row g-4 mt-4">
     <div class="col-12">
-        <div class="chart-container">
-            <h5 class="mb-3" data-en="Monthly Blog Posts" data-ar="المقالات الشهرية">Monthly Blog Posts</h5>
-            <canvas id="blogPostsChart"></canvas>
+        <div class="card shadow-sm">
+            <div class="card-header bg-light">
+                <h5 class="mb-0" data-en="Recent Blog Posts" data-ar="أحدث المقالات">Recent Blog Posts</h5>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush recent-posts-list">
+                    @foreach (var post in Model.RecentBlogPosts)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <a asp-controller="BlogPosts" asp-action="Edit" asp-route-id="@post.Id" class="post-title" data-en="@post.Title" data-ar="@post.TitleAr">@post.Title</a>
+                                <small class="d-block text-muted">by @post.Author</small>
+                            </div>
+                            <span class="text-muted">@post.DatePosted.ToShortDateString()</span>
+                        </li>
+                    }
+                </ul>
+            </div>
         </div>
     </div>
 </div>
 
+
 @section Scripts {
     <script>
         const monthlyWebsiteData = @Html.Raw(Json.Serialize(Model.MonthlyWebsiteData));
-        const monthlyBlogPostData = @Html.Raw(Json.Serialize(Model.MonthlyBlogPostData));
         const projectTypeLabels = @Html.Raw(Json.Serialize(Model.ProjectTypeLabels));
         const projectTypeData = @Html.Raw(Json.Serialize(Model.ProjectTypeData));
     </script>

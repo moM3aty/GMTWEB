@@ -115,24 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // 3. Blog Posts Bar Chart
-    if (document.getElementById('blogPostsChart')) {
-        const ctx = document.getElementById('blogPostsChart').getContext('2d');
-        const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: 'New Blog Posts',
-                data: typeof monthlyBlogPostData !== 'undefined' ? monthlyBlogPostData : [],
-                backgroundColor: '#ffedd5',
-                borderColor: '#f97316',
-                borderWidth: 2,
-                borderRadius: 8,
-                hoverBackgroundColor: '#f97316'
-            }]
-        };
-        new Chart(ctx, { type: 'bar', data: data, options: commonChartOptions });
-    }
+
 
     // --- Language Switcher Logic ---
     const langBtn = document.querySelector('.dashboard-language-btn');

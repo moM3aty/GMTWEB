@@ -42,7 +42,11 @@ namespace GMTWEB.Controllers
             {
                 monthlyBlogPostData[i] = blogPostGroups.ContainsKey(i + 1) ? blogPostGroups[i + 1] : 0;
             }
-
+            // --- Recent Blog Posts ---
+            var recentPosts = await _context.BlogPosts
+               .OrderByDescending(p => p.DatePosted)
+               .Take(5)
+               .ToListAsync();
             // --- Project Type Data (New Dynamic Logic) ---
             var projectTypeGroups = await _context.Websites
                 .GroupBy(w => w.Type)
@@ -60,9 +64,9 @@ namespace GMTWEB.Controllers
                 UsersCount = await _userManager.Users.CountAsync(),
                 BlogPostsCount = await _context.BlogPosts.CountAsync(),
                 MonthlyWebsiteData = monthlyWebsiteData.ToList(),
-                MonthlyBlogPostData = monthlyBlogPostData.ToList(),
                 ProjectTypeLabels = projectTypeLabels, 
-                ProjectTypeData = projectTypeData      
+                ProjectTypeData = projectTypeData      ,
+                RecentBlogPosts = recentPosts
             };
 
             return View(viewModel);

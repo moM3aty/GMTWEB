@@ -388,3 +388,21 @@
     padding-right: 1.25em;
     padding-left: 0;
 }
+.recent-posts-list .list-group-item {
+    padding: 1rem 1.5rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+    .recent-posts-list .list-group-item:hover {
+        background-color: var(--bg-light);
+    }
+
+.recent-posts-list .post-title {
+    font-weight: 600;
+    color: var(--text-dark);
+    text-decoration: none;
+}
+
+    .recent-posts-list .post-title:hover {
+        color: var(--primary-color);
+    }
